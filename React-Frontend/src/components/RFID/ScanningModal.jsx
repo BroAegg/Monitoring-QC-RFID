@@ -29,8 +29,6 @@ const ScanningModal = ({ onClose, onScanComplete, onSaveAll, workOrderData, scan
     return (
         <div className="scanning-modal-overlay">
             <div className="scanning-modal-content batch-mode" onClick={(e) => e.stopPropagation()}>
-                <button className="close-button" onClick={onClose}>×</button>
-
                 <div className="modal-header">
                     <h2>📡 Batch Scanning Mode</h2>
                     <p className="subtitle">Scan beberapa RFID sekaligus</p>
