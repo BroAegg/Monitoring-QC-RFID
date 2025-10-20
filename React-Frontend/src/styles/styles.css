@@ -1,0 +1,98 @@
+/**
+ * ========================================
+ * MODULAR CSS SYSTEM
+ * ========================================
+ * 
+ * Consolidated CSS architecture for RFID Monitoring System
+ * 
+ * Version: 1.0.0
+ * Last Updated: 2025
+ * 
+ * This is the master CSS file that imports all modular components.
+ * Import this single file in your React components instead of individual CSS files.
+ * 
+ * Architecture:
+ * 1. Variables & Tokens - Design system foundations
+ * 2. Reset & Base - Browser normalization
+ * 3. Typography - Font system
+ * 4. Layout - Grid and flex utilities
+ * 5. Components - Reusable UI elements
+ * 6. Utilities - Helper classes
+ * 
+ * ========================================
+ */
+
+/* ===== 1. FOUNDATION: Variables & Design Tokens ===== */
+@import './modules/_variables.css';
+
+/* ===== 2. BASE: Reset & Normalization ===== */
+@import './modules/_reset.css';
+
+/* ===== 3. TYPOGRAPHY: Font System ===== */
+@import './modules/_typography.css';
+
+/* ===== 4. LAYOUT: Grid & Flex System ===== */
+@import './modules/_layout.css';
+
+/* ===== 5. COMPONENTS: UI Elements ===== */
+
+/* 5.1 Navigation */
+@import './modules/_sidebar.css';
+
+/* 5.2 Forms */
+@import './modules/_forms.css';
+
+/* 5.3 Buttons */
+@import './modules/_buttons.css';
+
+/* 5.4 Cards */
+@import './modules/_cards.css';
+
+/* 5.5 Tables */
+@import './modules/_tables.css';
+
+/* 5.6 Modals */
+@import './modules/_modals.css';
+
+/* 5.7 QC System */
+@import './modules/_qc-buttons.css';
+
+/* ===== 6. FEATURES: Animations & Effects ===== */
+@import './modules/_animations.css';
+
+/* ===== 7. BROWSER SPECIFIC: Scrollbar ===== */
+@import './modules/_scrollbar.css';
+
+/* ===== 8. UTILITIES: Helper Classes ===== */
+@import './modules/_utilities.css';
+
+/**
+ * ========================================
+ * USAGE INSTRUCTIONS
+ * ========================================
+ * 
+ * In your React component:
+ * 
+ * import './styles/styles.css';
+ * 
+ * Then use the CSS classes directly:
+ * 
+ * <div className="card shadow-lg rounded-xl">
+ *   <h2 className="text-2xl font-bold text-primary">Title</h2>
+ *   <p className="text-secondary mt-2">Description</p>
+ *   <button className="btn btn-primary mt-4">Action</button>
+ * </div>
+ * 
+ * ========================================
+ * BENEFITS
+ * ========================================
+ * 
+ * ✅ Single import - No need to import 17+ CSS files
+ * ✅ Consistent design - All components use same variables
+ * ✅ Better performance - Reduced HTTP requests
+ * ✅ Easy maintenance - Change variables in one place
+ * ✅ Modular development - Edit individual module files
+ * ✅ Scalable - Easy to add new components
+ * 
+ * ========================================
+ */

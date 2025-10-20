@@ -1,0 +1,303 @@
+/**
+ * ========================================
+ * Modal Components
+ * ========================================
+ * 
+ * Overlay modals with backdrop and animations
+ */
+
+/* Modal backdrop */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal-backdrop);
+  animation: fade-in var(--duration-fast) ease-out;
+}
+
+/* Modal container */
+.modal {
+  background: var(--white);
+  border-radius: var(--radius-2xl);
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: var(--shadow-2xl);
+  animation: scale-in 0.3s ease-out;
+  z-index: var(--z-modal);
+}
+
+/* Modal header */
+.modal-header {
+  padding: var(--spacing-6);
+  border-bottom: var(--border-1) solid var(--gray-300);
+}
+
+.modal-title {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.modal-close {
+  position: absolute;
+  top: var(--spacing-4);
+  right: var(--spacing-4);
+  background: transparent;
+  border: none;
+  font-size: var(--text-2xl);
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: var(--spacing-2);
+  line-height: 1;
+  transition: var(--transition-base);
+}
+
+.modal-close:hover {
+  color: var(--text-primary);
+  transform: rotate(90deg);
+}
+
+/* Modal body */
+.modal-body {
+  padding: var(--spacing-6);
+}
+
+/* Modal footer */
+.modal-footer {
+  padding: var(--spacing-6);
+  border-top: var(--border-1) solid var(--gray-300);
+  display: flex;
+  gap: var(--spacing-3);
+  justify-content: flex-end;
+}
+
+/* ===== SCANNING MODAL SPECIFIC ===== */
+
+/* Scanning modal card */
+.scanning-card {
+  background: var(--white);
+  border-radius: var(--radius-2xl);
+  padding: var(--spacing-8);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  position: relative;
+  animation: floating 3s ease-in-out infinite;
+}
+
+.scanning-card.scanning {
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3);
+}
+
+.scanning-card.success {
+  background: var(--white);
+  box-shadow: var(--shadow-green-lg);
+}
+
+/* Scanning status */
+.scanning-status {
+  margin-bottom: var(--spacing-6);
+}
+
+.scanning-title {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.scanning-message {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* RFID Visual */
+.rfid-visual {
+  position: relative;
+  margin: var(--spacing-8) 0;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* RFID chip icon */
+.rfid-chip {
+  width: 120px;
+  height: 150px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-lg);
+  position: relative;
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3);
+  animation: rfid-float 3s ease-in-out infinite;
+}
+
+.chip-lines {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 60%;
+}
+
+.chip-line {
+  width: 100%;
+  height: 8px;
+  background: var(--gradient-yellow);
+  margin: 6px 0;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-inset);
+}
+
+/* Scan beam effect */
+.scan-beam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary-blue);
+  box-shadow: 0 0 10px var(--primary-blue);
+  animation: scan-beam 2s ease-in-out infinite;
+}
+
+/* Wave signals */
+.wave-signals {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+}
+
+.wave {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  margin: -60px 0 0 -60px;
+  border: var(--border-3) solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-full);
+  animation: wave 2s ease-out infinite;
+}
+
+.wave:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.wave:nth-child(3) {
+  animation-delay: 1s;
+}
+
+/* Success checkmark */
+.success-checkmark {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.check-circle {
+  width: 120px;
+  height: 120px;
+  border: var(--border-6) solid var(--success);
+  border-radius: var(--radius-full);
+  position: relative;
+  animation: scale-in 0.3s ease-out;
+}
+
+.check-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4rem;
+  color: var(--success);
+  animation: scale-in 0.5s ease-out 0.2s both;
+}
+
+.success-glow {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  border: var(--border-6) solid rgba(16, 185, 129, 0.2);
+  border-radius: var(--radius-full);
+  animation: success-glow 1.5s ease-in-out infinite;
+}
+
+/* Scan details */
+.scan-details {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-6);
+  margin-top: var(--spacing-6);
+}
+
+.scan-details-header {
+  padding-bottom: var(--spacing-3);
+  margin-bottom: var(--spacing-3);
+  border-bottom: var(--border-1) solid var(--gray-300);
+}
+
+.scan-detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-3);
+}
+
+.scan-detail-row:last-child {
+  margin-bottom: 0;
+}
+
+.scan-detail-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.scan-detail-value {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+}
+
+/* Success info box */
+.success-info {
+  background: var(--blue-50);
+  border: var(--border-2) solid var(--primary-blue);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-4);
+  margin-top: var(--spacing-6);
+}
+
+.success-info-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-2);
+}
+
+.success-info-value {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--primary-blue);
+}
+
+.success-message {
+  font-size: var(--text-base);
+  color: var(--success);
+  font-weight: var(--font-semibold);
+  margin-top: var(--spacing-4);
+}

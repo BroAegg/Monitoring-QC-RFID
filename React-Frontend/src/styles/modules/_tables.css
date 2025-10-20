@@ -1,0 +1,124 @@
+/**
+ * ========================================
+ * Table Components
+ * ========================================
+ * 
+ * Data tables with sorting, hover effects, and responsive design
+ */
+
+/* Table container */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: var(--border-1) solid var(--gray-300);
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+}
+
+/* Table header */
+.table thead {
+  background: var(--gradient-bg-blue);
+  border-bottom: var(--border-2) solid var(--blue-300);
+}
+
+.table th {
+  padding: var(--spacing-4);
+  text-align: left;
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--primary-blue-dark);
+  border-bottom: var(--border-1) solid var(--gray-300);
+  white-space: nowrap;
+}
+
+/* Table body */
+.table tbody tr {
+  transition: var(--transition-all);
+  border-bottom: var(--border-1) solid var(--gray-200);
+}
+
+.table tbody tr:hover {
+  background: var(--blue-50);
+}
+
+.table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.table td {
+  padding: var(--spacing-4);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+/* Table cell utilities */
+.table-cell-center {
+  text-align: center;
+}
+
+.table-cell-right {
+  text-align: right;
+}
+
+.table-cell-bold {
+  font-weight: var(--font-semibold);
+}
+
+.table-cell-primary {
+  color: var(--primary-blue);
+  font-weight: var(--font-medium);
+}
+
+.table-cell-secondary {
+  color: var(--text-secondary);
+}
+
+/* Action buttons in table */
+.table-actions {
+  display: flex;
+  gap: var(--spacing-2);
+  justify-content: flex-end;
+}
+
+.table-action-btn {
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-md);
+  transition: var(--transition-all);
+}
+
+.table-action-btn.delete {
+  background: var(--danger);
+  color: var(--text-white);
+}
+
+.table-action-btn.delete:hover {
+  background: var(--danger-dark);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+  .table-container {
+    border-radius: var(--radius-md);
+  }
+
+  .table th,
+  .table td {
+    padding: var(--spacing-3);
+    font-size: var(--text-xs);
+  }
+
+  .table-actions {
+    flex-direction: column;
+  }
+}

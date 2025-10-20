@@ -1,0 +1,341 @@
+================================================================================
+                    PANDUAN LENGKAP SETUP SISTEM RFID
+                    Django + React + WebSocket + Serial
+================================================================================
+
+PERSIAPAN AWAL
+=============
+
+1. Pastikan software berikut sudah terinstall:
+   - Python 3.8https://python.org)
+   - Node.js16https://nodejs.org)
+   - Redis Server (https://redis.io/download)
+   - Git (https://git-scm.com)
+
+2. Pastikan hardware RFID scanner sudah terhubung ke komputer
+   - Catat port COM yang digunakan (misal: COM3)
+   - Pastikan driver RFID scanner sudah terinstall
+
+3ruktur folder yang diharapkan:
+   Productivity/
+   ├── django-backend/
+   │   ├── config/
+   │   ├── rfid_api/
+   │   ├── manage.py
+   │   ├── scan_rfid.py
+   │   └── requirements.txt
+   └── website-productivity/
+       ├── src/
+       ├── package.json
+       └── ...
+
+================================================================================
+STEP 1: SETUP BACKEND DJANGO
+================================================================================
+1.1uka Command Prompt/Terminal, masuk ke folder django-backend:
+    cd django-backend
+1.2irtual environment Python:
+    python -m venv venv
+
+1.3. Aktifkan virtual environment:
+    # Windows:
+    venv\Scripts\activate
+    
+    # Linux/Mac:
+    source venv/bin/activate
+
+10.4Install dependensi Django:
+    pip install -r requirements.txt
+1.5. Jalankan migrasi database:
+    python manage.py makemigrations
+    python manage.py migrate
+
+10.6at superuser untuk akses admin (opsional):
+    python manage.py createsuperuser
+    # Ikuti instruksi untuk membuat username dan password1.7Test server Django (jangan tutup terminal ini):
+    python manage.py runserver
+    # Server akan berjalan di http://12700.1
+18 Buka browser, akses:
+    http://12700.1:8000/admin/
+    # Login dengan superuser yang dibuat di step 1.6.9 admin panel, tambahkan beberapa data test:
+    - Klik "Data Terdaftar->Add Data Terdaftar
+    - Isi: Nama, Detail, RFID Tag (misal: 123456789 - Simpan beberapa data untuk testing
+
+================================================================================
+STEP 2SETUP REDIS SERVER
+================================================================================
+2.1wnload dan install Redis:
+    # Windows: Download dari https://github.com/microsoftarchive/redis/releases
+    # Linux: sudo apt-get install redis-server
+    # Mac: brew install redis
+
+20.2ankan Redis server:
+    # Windows: redis-server
+    # Linux/Mac: sudo systemctl start redis
+    
+    # Atau jalankan manual:
+    redis-server
+2.3Test koneksi Redis:
+    redis-cli ping
+    # Harus return "PONG"
+
+================================================================================
+STEP3 SETUP FRONTEND REACT
+================================================================================
+
+3.1Buka terminal baru, masuk ke folder website-productivity:
+    cd website-productivity
+
+30.2Install dependensi React:
+    npm install
+
+3.3nstall package WebSocket:
+    npm install react-use-websocket
+
+3.4ankan server React (jangan tutup terminal ini):
+    npm run dev
+    # Server akan berjalan di http://localhost:5173
+
+35 Buka browser, akses:
+    http://localhost:5173  # Pastikan aplikasi React berjalan dengan normal
+
+================================================================================
+STEP 4: KONFIGURASI RFID SCANNER
+================================================================================
+
+4.1tikan RFID scanner terhubung ke komputer
+4.2 Cek port COM yang digunakan:
+    # Windows: Device Manager -> Ports (COM & LPT)
+    # Catat port yang digunakan RFID scanner (misal: COM30.3. Edit file scan_rfid.py:
+    # Buka file: django-backend/scan_rfid.py
+    # Ubah baris: PORT = COM3 sesuai port RFID scanner Anda
+4.4 Test koneksi RFID scanner:
+    # Di terminal baru, masuk ke folder django-backend
+    cd django-backend
+    
+    # Aktifkan virtual environment:
+    venv\Scripts\activate  # Windows
+    # source venv/bin/activate  # Linux/Mac
+    
+    # Jalankan script RFID:
+    python scan_rfid.py
+    
+    # Scan RFID tag, pastikan muncul pesan:
+    # Tag terdeteksi: [ID_RFID]"
+    # Data berhasil dikirim ke Django: {...}"
+
+================================================================================
+STEP5 INTEGRASI WEBSOCKET DI FRONTEND
+================================================================================50.1. Edit file DaftarID.jsx:
+    # Buka file: website-productivity/src/components/DaftarID.jsx
+    
+    # Tambahkan import di bagian atas:
+    import { useState, useEffect } from 'react';
+    import useWebSocket from 'react-use-websocket;
+
+5.2bahkan state untuk RFID:
+    # Di dalam komponen DaftarID, tambahkan state:
+    const [isScanMode, setIsScanMode] = useState(false);
+    constwsConnected, setWsConnected] = useState(false);
+
+5.3ambahkan WebSocket connection:
+    # Tambahkan setelah state declarations:
+    const { lastMessage, readyState } = useWebSocket('ws://12700.18000/rfid/',[object Object]        onOpen: () => {
+            console.log('WebSocket terhubung');
+            setWsConnected(true);
+        },
+        onClose: () => {
+            console.log('WebSocket terputus');
+            setWsConnected(false);
+        },
+        onError: (error) => {
+            console.error('WebSocket error:', error);
+            setWsConnected(false);
+        },
+        shouldReconnect: (closeEvent) => true,
+        reconnectInterval: 3000    });
+
+5.4. Tambahkan handler untuk pesan WebSocket:
+    # Tambahkan useEffect untuk handle pesan:
+    useEffect(() => [object Object]   if (lastMessage)[object Object]            try[object Object]             const data = JSON.parse(lastMessage.data);
+                console.log('Pesan WebSocket:', data);
+                
+                if (data.status === 'found') {
+                    // Data RFID ditemukan
+                    setFormData({
+                        ...formData,
+                        id: data.data.rfid_tag,
+                        nama: data.data.name,
+                        nik: data.data.details || '',
+                        bagian: '',
+                        line: '',
+                        fasilitas: ''
+                    });
+                    showMessage(`RFID ${data.data.rfid_tag} ditemukan! Data terisi otomatis.`, 'success');
+                } else if (data.status === 'not_found') {
+                    // RFID baru
+                    setFormData({
+                        ...formData,
+                        id: data.rfid,
+                        nama: '',
+                        nik: '',
+                        bagian: '',
+                        line: '',
+                        fasilitas: ''
+                    });
+                    showMessage(`RFID baru: ${data.rfid}. Silakan lengkapi data.`, 'info');
+                }
+                setIsScanMode(false);
+            } catch (error)[object Object]           console.error(Error parsing WebSocket message:', error);
+            }
+        }
+    }, lastMessage]);
+
+5.5. Tambahkan tombol Scan RFID:
+    # Cari bagian form input, tambahkan tombol setelah field ID:
+    <div className="form-group">
+        <label htmlFor="id">ID:</label>
+        <div style={{ display: flex', gap: 10px', alignItems: 'center' }}>
+            <input
+                type="text"
+                id="id"
+                name="id"
+                value={formData.id}
+                onChange={handleInputChange}
+                placeholder="Masukkan ID atau scan RFID"
+                className="form-input"
+                style={{ flex: 1 }}
+            />
+            <button
+                type="button"
+                onClick={() => {
+                    setIsScanMode(true);
+                    showMessage(Silakan scan RFID...', 'info');
+                }}
+                className=btn btn-primary"
+                style={{ whiteSpace: 'nowrap' }}
+                disabled={isLoading}
+            >
+             [object Object]isScanMode ?Scanning...' : 'Scan RFID'}
+            </button>
+        </div>
+        {isScanMode && (
+            <div style={[object Object]             color: '#007cff', 
+                fontSize: '0.9rem', 
+                marginTop: '5px,              fontStyle: 'italic
+            }}>
+                ⏳ Menunggu scan RFID...
+            </div>
+        )}
+        {wsConnected && (
+            <div style={[object Object]             color: '#28a745', 
+                fontSize: '0.8rem', 
+                marginTop:5px
+            }}>
+                ✅ WebSocket terhubung
+            </div>
+        )}
+    </div>56n file dan refresh browser
+
+================================================================================
+STEP6: TESTING SISTEM LENGKAP
+================================================================================
+
+60.1ikan semua service berjalan:
+    ✅ Django server: http://1271    ✅ Redis server: redis-server
+    ✅ React server: http://localhost:5173
+    ✅ RFID scanner script: python scan_rfid.py
+
+60.2est scan RFID yang sudah terdaftar:
+    - Buka http://localhost:5173
+    - Klik tombolScan RFID"
+    - Scan RFID tag yang sudah ada di database
+    - Form akan terisi otomatis dengan data yang ada
+    - Pesan: "RFID [ID] ditemukan! Data terisi otomatis."
+
+60.3est scan RFID baru:
+    - Klik tombolScan RFID"
+    - Scan RFID tag yang belum terdaftar
+    - Field ID akan terisi otomatis
+    - Field lain kosong, siap untuk diisi manual
+    - Pesan:RFID baru: ID]. Silakan lengkapi data."6.4. Test submit form:
+    - Isi data lengkap di form
+    - Klik tombol Add" atau "Update"
+    - Data akan tersimpan ke database Django
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+MASALAH 1: Django server error "channels not found"
+SOLUSI:
+- Pastikan virtual environment aktif
+- Install ulang: pip install channels channels-redis
+
+MASALAH 2: Redis connection error
+SOLUSI:
+- Pastikan Redis server berjalan
+- Cek: redis-cli ping
+- Restart Redis server
+
+MASALAH 3ebSocket tidak terhubung
+SOLUSI:
+- Pastikan Django server berjalan dengan ASGI
+- Cek browser console untuk error
+- Pastikan URL WebSocket benar: ws://12700.1800/ws/rfid/
+
+MASALAH 4: RFID scanner tidak terdeteksi
+SOLUSI:
+- Cek port COM di Device Manager
+- Update driver RFID scanner
+- Test dengan script scan_rfid.py terlebih dahulu
+
+MASALAH5 Form tidak terisi otomatis
+SOLUSI:
+- Cek browser console untuk error WebSocket
+- Pastikan data RFID ada di database Django
+- Cek response dari API /api/check_rfid/
+
+================================================================================
+PERINTAH JALANKAN SISTEM (QUICK START)
+================================================================================
+
+1. Terminal 1- Django Backend:
+   cd django-backend
+   venv\Scripts\activate
+   python manage.py runserver
+
+2. Terminal 2 - Redis:
+   redis-server
+
+3. Terminal 3- React Frontend:
+   cd website-productivity
+   npm run dev
+
+4. Terminal 4- RFID Scanner:
+   cd django-backend
+   venv\Scripts\activate
+   python scan_rfid.py
+
+5. Browser:
+   http://localhost:5173
+
+================================================================================
+CATATAN PENTING
+================================================================================
+
+- Pastikan semua service berjalan bersamaan
+- RFID scanner harus terhubung sebelum menjalankan scan_rfid.py
+- WebSocket memerlukan koneksi yang stabil
+- Data RFID harus unik di database
+- Backup database secara berkala
+
+================================================================================
+SELESAI! SISTEM RFID SIAP DIGUNAKAN
+================================================================================
+
+Sekarang Anda bisa:1an RFID yang sudah terdaftar → Form terisi otomatis2. Scan RFID baru → Field ID terisi, siap input data baru
+3. Submit form → Data tersimpan ke database
+4. Lihat data di admin Django: http://12708000min/
+
+Happy Coding! 🚀 

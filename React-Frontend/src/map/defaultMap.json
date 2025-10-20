@@ -1,0 +1,113 @@
+{
+    "locations": {
+        "Cutting": {
+            "x": 110,
+            "y": 110,
+            "color": "#4da3ff",
+            "label": "Cutting"
+        },
+        "Sewing": {
+            "x": 820,
+            "y": 480,
+            "color": "#7aa6ff",
+            "label": "Sewing"
+        },
+        "Finishing": {
+            "x": 150,
+            "y": 480,
+            "color": "#ffc14d",
+            "label": "Finishing"
+        },
+        "Gudang ACC": {
+            "x": 700,
+            "y": 140,
+            "color": "#ff7aa6",
+            "label": "Gudang ACC"
+        },
+        "Line 1": {
+            "x": 420,
+            "y": 320,
+            "color": "#00ffd6",
+            "label": "Line 1"
+        },
+        "Line 2": {
+            "x": 480,
+            "y": 320,
+            "color": "#00ffd6",
+            "label": "Line 2"
+        },
+        "Line 3": {
+            "x": 540,
+            "y": 320,
+            "color": "#00ffd6",
+            "label": "Line 3"
+        },
+        "Robotics": {
+            "x": 520,
+            "y": 600,
+            "color": "#b58bff",
+            "label": "Robotics"
+        },
+        "Office": {
+            "x": 900,
+            "y": 110,
+            "color": "#a0e3ff",
+            "label": "Office"
+        }
+    },
+    "obstacles": [
+        {
+            "x": 300,
+            "y": 200,
+            "w": 140,
+            "h": 120,
+            "color": "rgba(100,110,160,0.45)",
+            "stroke": "rgba(255,255,255,0.15)",
+            "name": "Obstacle A"
+        },
+        {
+            "x": 680,
+            "y": 330,
+            "w": 120,
+            "h": 140,
+            "color": "rgba(100,110,160,0.45)",
+            "stroke": "rgba(255,255,255,0.15)",
+            "name": "Obstacle B"
+        },
+        {
+            "x": 140,
+            "y": 360,
+            "w": 160,
+            "h": 80,
+            "color": "rgba(100,110,160,0.45)",
+            "stroke": "rgba(255,255,255,0.15)",
+            "name": "Obstacle C"
+        }
+    ],
+    "nogo": [
+        {
+            "x": 840,
+            "y": 520,
+            "w": 110,
+            "h": 80,
+            "color": "rgba(255,80,80,0.18)",
+            "stroke": "#ff4d4d",
+            "name": "No-Go 1"
+        },
+        {
+            "x": 80,
+            "y": 80,
+            "w": 90,
+            "h": 70,
+            "color": "rgba(255,80,80,0.18)",
+            "stroke": "#ff4d4d",
+            "name": "No-Go 2"
+        }
+    ],
+    "routes": {
+        "Cutting|Sewing": {
+            "name": "Cutting to Sewing",
+            "waypoints": []
+        }
+    }
+}

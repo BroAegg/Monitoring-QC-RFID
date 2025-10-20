@@ -1,0 +1,252 @@
+/**
+ * ========================================
+ * CSS Variables - Global Design Tokens
+ * ========================================
+ * 
+ * Centralized design system variables for
+ * consistent styling across the application
+ */
+
+:root {
+  /* ===== PRIMARY COLORS ===== */
+  --primary-blue: #2563EB;
+  --primary-blue-dark: #1E40AF;
+  --primary-blue-darker: #1E3A8A;
+  --primary-blue-light: #3B82F6;
+  --primary-blue-lighter: #60A5FA;
+
+  /* ===== SECONDARY COLORS ===== */
+  --cyan-500: #06B6D4;
+  --cyan-600: #0891B2;
+  --cyan-200: #A5F3FC;
+
+  --purple-400: #C084FC;
+  --purple-500: #A855F7;
+
+  /* ===== SEMANTIC COLORS ===== */
+  /* Success - Green */
+  --success: #10B981;
+  --success-light: #34D399;
+  --success-dark: #059669;
+
+  /* Warning - Yellow/Orange */
+  --warning-yellow: #EAB308;
+  --warning-orange: #F59E0B;
+  --warning-orange-light: #FCD34D;
+
+  /* Danger - Red */
+  --danger: #EF4444;
+  --danger-dark: #DC2626;
+  --danger-light: #FEF2F2;
+
+  /* ===== NEUTRAL/GRAY SCALE ===== */
+  --dark-900: #0F172A;    /* Sidebar background */
+  --dark-800: #1E293B;    /* Sidebar hover, dark elements */
+  --dark-700: #334155;    /* Border color */
+  
+  --gray-900: #1E293B;
+  --gray-800: #1E293B;
+  --gray-700: #475569;
+  --gray-600: #64748B;
+  --gray-500: #94A3B8;
+  --gray-400: #CBD5E1;
+  --gray-300: #E2E8F0;
+  --gray-200: #F1F5F9;
+  --gray-100: #F8FAFC;
+
+  --white: #FFFFFF;
+
+  /* ===== BLUE SHADES (for backgrounds) ===== */
+  --blue-50: #EFF6FF;
+  --blue-100: #DBEAFE;
+  --blue-200: #BFDBFE;
+  --blue-300: #93C5FD;
+
+  /* ===== BACKGROUND COLORS ===== */
+  --bg-primary: #F9FAFB;
+  --bg-secondary: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --bg-dark: #0F172A;
+  --bg-light: #F1F5F9;
+
+  /* ===== TEXT COLORS ===== */
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+  --text-muted: #94A3B8;
+  --text-light: #F8FAFC;
+  --text-white: #FFFFFF;
+
+  /* ===== SIDEBAR SPECIFIC ===== */
+  --sidebar-bg: #0F172A;
+  --sidebar-hover: #1E293B;
+  --sidebar-active: #2563EB;
+  --sidebar-text: #94A3B8;
+  --sidebar-text-active: #FFFFFF;
+  --sidebar-border: #1E293B;
+
+  /* ===== SPACING SYSTEM ===== */
+  /* Based on 4px grid */
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;  /* 4px */
+  --spacing-2: 0.5rem;   /* 8px */
+  --spacing-3: 0.75rem;  /* 12px */
+  --spacing-4: 1rem;     /* 16px */
+  --spacing-5: 1.25rem;  /* 20px */
+  --spacing-6: 1.5rem;   /* 24px */
+  --spacing-7: 1.75rem;  /* 28px */
+  --spacing-8: 2rem;     /* 32px */
+  --spacing-10: 2.5rem;  /* 40px */
+  --spacing-12: 3rem;    /* 48px */
+  --spacing-16: 4rem;    /* 64px */
+
+  /* ===== BORDER RADIUS ===== */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ===== BORDER WIDTH ===== */
+  --border-1: 1px;
+  --border-2: 2px;
+  --border-3: 3px;
+  --border-4: 4px;
+  --border-6: 6px;
+
+  /* ===== BOX SHADOWS ===== */
+  /* Subtle shadows */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 12px 28px rgba(0, 0, 0, 0.25);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+
+  /* Colored shadows */
+  --shadow-blue-sm: 0 4px 12px rgba(37, 99, 235, 0.15);
+  --shadow-blue-md: 0 4px 16px rgba(37, 99, 235, 0.4);
+  --shadow-blue-lg: 0 8px 24px rgba(37, 99, 235, 0.5);
+  --shadow-blue-xl: 0 12px 32px rgba(37, 99, 235, 0.2);
+  
+  --shadow-cyan-md: 0 8px 20px rgba(6, 182, 212, 0.3);
+  --shadow-purple-md: 0 0 12px rgba(168, 85, 247, 0.5);
+  --shadow-green-md: 0 0 12px rgba(16, 185, 129, 0.5);
+  --shadow-green-lg: 0 0 20px rgba(16, 185, 129, 0.8);
+
+  /* Focus shadows */
+  --shadow-focus-blue: 0 0 0 3px rgba(37, 99, 235, 0.1);
+
+  /* Inset shadows */
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  /* ===== TEXT SHADOWS ===== */
+  --text-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --text-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+  /* ===== TRANSITIONS ===== */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.2s ease;
+  --transition-slow: 0.3s ease;
+  --transition-all: all 0.2s ease;
+
+  /* ===== FONT SIZES ===== */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 1.875rem;  /* 30px */
+  --text-4xl: 2.25rem;   /* 36px */
+
+  /* ===== FONT WEIGHTS ===== */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* ===== LINE HEIGHTS ===== */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.6;
+
+  /* ===== Z-INDEX LAYERS ===== */
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-fixed: 30;
+  --z-modal-backdrop: 40;
+  --z-modal: 50;
+  --z-popover: 60;
+  --z-tooltip: 70;
+  --z-sidebar: 100;
+
+  /* ===== GRADIENTS ===== */
+  /* Primary gradients */
+  --gradient-primary: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%);
+  --gradient-primary-dark: linear-gradient(135deg, #1E40AF 0%, #1E3A8A 100%);
+  --gradient-primary-reverse: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%);
+  --gradient-primary-light: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
+  --gradient-primary-multi: linear-gradient(90deg, #2563EB, #3B82F6, #60A5FA);
+
+  /* Background gradients */
+  --gradient-bg-white: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+  --gradient-bg-gray: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+  --gradient-bg-blue: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+  --gradient-bg-blue-light: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+  --gradient-bg-dark: linear-gradient(135deg, #1E293B 0%, #2563EB 100%);
+
+  /* Semantic gradients */
+  --gradient-cyan: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);
+  --gradient-purple: linear-gradient(135deg, #C084FC 0%, #A855F7 100%);
+  --gradient-green: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+  --gradient-yellow: linear-gradient(135deg, #FCD34D, #F59E0B);
+
+  /* Glass effect */
+  --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+
+  /* ===== OPACITY LEVELS ===== */
+  --opacity-0: 0;
+  --opacity-10: 0.1;
+  --opacity-20: 0.2;
+  --opacity-30: 0.3;
+  --opacity-40: 0.4;
+  --opacity-50: 0.5;
+  --opacity-60: 0.6;
+  --opacity-70: 0.7;
+  --opacity-80: 0.8;
+  --opacity-90: 0.9;
+  --opacity-100: 1;
+
+  /* ===== DIMENSIONS ===== */
+  --sidebar-width: 200px;
+  --header-height: 64px;
+  
+  /* ===== ANIMATION DURATIONS ===== */
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+  --duration-slower: 500ms;
+  --duration-scan: 2500ms;
+  --duration-success: 1500ms;
+
+  /* ===== ANIMATION TIMING FUNCTIONS ===== */
+  --ease-default: ease;
+  --ease-in: ease-in;
+  --ease-out: ease-out;
+  --ease-in-out: ease-in-out;
+}
+
+/* ===== DARK MODE SUPPORT (Future Enhancement) ===== */
+/* 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #0F172A;
+    --bg-secondary: #1E293B;
+    --text-primary: #F8FAFC;
+    --text-secondary: #94A3B8;
+  }
+}
+*/

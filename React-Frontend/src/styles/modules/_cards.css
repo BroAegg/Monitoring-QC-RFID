@@ -1,0 +1,251 @@
+/**
+ * ========================================
+ * Card Components
+ * ========================================
+ * 
+ * Reusable card containers with various styles
+ */
+
+/* Base card */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-6);
+  box-shadow: var(--shadow-sm);
+  border: var(--border-2) solid var(--gray-200);
+  transition: var(--transition-all);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Card header */
+.card-header {
+  padding-bottom: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+  border-bottom: var(--border-2) solid var(--gray-200);
+}
+
+.card-title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.card-subtitle {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* Card body */
+.card-body {
+  padding: 0;
+}
+
+/* Card footer */
+.card-footer {
+  padding-top: var(--spacing-4);
+  margin-top: var(--spacing-4);
+  border-top: var(--border-2) solid var(--gray-200);
+}
+
+/* Stat card */
+.stat-card {
+  background: var(--gradient-bg-white);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-6);
+  box-shadow: var(--shadow-lg);
+  border: var(--border-2) solid var(--gray-200);
+  transition: var(--transition-all);
+}
+
+.stat-card:hover {
+  box-shadow: var(--shadow-blue-xl);
+  border-color: var(--primary-blue);
+  transform: translateY(-4px);
+}
+
+.stat-card.primary {
+  background: var(--gradient-primary-light);
+  color: var(--text-white);
+  border: none;
+  box-shadow: var(--shadow-blue-md);
+}
+
+.stat-card.primary:hover {
+  box-shadow: var(--shadow-blue-lg);
+  background: var(--gradient-primary-reverse);
+}
+
+.stat-card.primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-primary-multi);
+  background-size: 200% 100%;
+  animation: gradient-shift 3s ease infinite;
+  border-radius: var(--radius-xl);
+  z-index: -1;
+}
+
+.stat-card.header-style {
+  background: var(--gradient-bg-dark);
+  color: var(--text-white);
+}
+
+.stat-card.info {
+  background: var(--gradient-bg-blue);
+  border: var(--border-2) solid var(--blue-300);
+}
+
+.stat-card.cyan {
+  background: var(--gradient-cyan);
+  color: var(--text-white);
+  border: var(--border-3) solid var(--cyan-200);
+  box-shadow: var(--shadow-cyan-md);
+}
+
+/* Stat card content */
+.stat-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-2);
+}
+
+.stat-value {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  text-shadow: var(--text-shadow-sm);
+}
+
+.stat-value.large {
+  font-size: 4rem;
+  text-shadow: var(--text-shadow-md);
+}
+
+.stat-card.primary .stat-label,
+.stat-card.cyan .stat-label,
+.stat-card.header-style .stat-label {
+  color: var(--text-white);
+  opacity: var(--opacity-90);
+}
+
+.stat-card.primary .stat-value,
+.stat-card.cyan .stat-value,
+.stat-card.header-style .stat-value {
+  color: var(--text-white);
+}
+
+/* Highlighted card */
+.card-highlighted {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-highlighted::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-glass);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+  pointer-events: none;
+}
+
+.card-highlighted:hover::before {
+  opacity: 1;
+}
+
+/* RFID Scan card */
+.rfid-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-6);
+  box-shadow: var(--shadow-sm);
+  border: var(--border-2) solid var(--gray-200);
+  transition: var(--transition-all);
+}
+
+.rfid-card:hover {
+  box-shadow: var(--shadow-blue-md);
+  border-color: var(--primary-blue);
+  transform: translateY(-2px);
+}
+
+.rfid-card-header {
+  border-bottom: var(--border-2) solid var(--gray-200);
+  padding-bottom: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+}
+
+.rfid-card-id {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--primary-blue);
+  margin-bottom: var(--spacing-1);
+}
+
+.rfid-card-time {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-3);
+}
+
+.info-icon {
+  font-size: var(--text-lg);
+}
+
+.info-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.info-value {
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* Empty state card */
+.empty-card {
+  text-align: center;
+  padding: var(--spacing-12);
+  background: var(--gray-100);
+  border-radius: var(--radius-lg);
+  border: var(--border-2) dashed var(--gray-300);
+}
+
+.empty-icon {
+  font-size: 4rem;
+  color: var(--gray-400);
+  margin-bottom: var(--spacing-4);
+}
+
+.empty-title {
+  font-size: var(--text-xl);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.empty-text {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
