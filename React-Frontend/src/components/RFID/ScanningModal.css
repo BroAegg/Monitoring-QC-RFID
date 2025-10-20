@@ -473,26 +473,23 @@
     border-radius: 16px;
     padding: 2rem;
     margin-bottom: 1.5rem;
-    min-height: 200px;
+    min-height: 250px;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
-.scan-ready {
-    text-align: center;
+.scan-area.flash-success {
+    background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+    animation: successPulse 0.6s ease;
 }
 
-.rfid-icon-large {
-    font-size: 4rem;
-    animation: pulse 2s ease-in-out infinite;
-}
-
-.scan-instruction {
-    color: #475569;
-    font-size: 1rem;
-    margin: 1rem 0;
-    font-weight: 500;
+@keyframes successPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
 }
 
 .scan-trigger-btn {
@@ -506,61 +503,55 @@
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    margin-top: 1rem;
 }
 
-.scan-trigger-btn:hover {
+.scan-trigger-btn:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
 }
 
+.scan-trigger-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .scanning-active {
     text-align: center;
+    width: 100%;
 }
 
 .scanning-text {
     color: #2563EB;
     font-weight: 600;
     margin-top: 1rem;
-    animation: blink 1s ease-in-out infinite;
+    font-size: 1.1rem;
+    animation: pulse 2s ease-in-out infinite;
 }
 
-.scan-success {
-    text-align: center;
-    animation: bounceIn 0.5s ease;
-}
-
-.success-icon-circle {
-    width: 80px;
-    height: 80px;
+.last-scanned-badge {
     background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1rem;
-    font-size: 3rem;
     color: white;
-    animation: scaleUp 0.4s ease;
-}
-
-@keyframes scaleUp {
-    0% { transform: scale(0); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-.scanned-rfid {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    margin-top: 1rem;
     font-family: 'Courier New', monospace;
-    font-size: 1.5rem;
     font-weight: 700;
-    color: #1E293B;
-    letter-spacing: 1px;
-    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    display: inline-block;
+    animation: slideInDown 0.4s ease;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
 
-.success-text {
-    color: #10B981;
-    font-weight: 600;
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Scanned List */

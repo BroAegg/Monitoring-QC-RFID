@@ -8,26 +8,24 @@ import { useState, useEffect } from 'react';
 import './ScanningModal.css';
 
 const ScanningModal = ({ onClose, onScanComplete, onSaveAll, workOrderData, scannedRfids, isSubmitting }) => {
-    const [scanningStage, setScanningStage] = useState('ready'); // ready, scanning, scanned
-    const [currentRfid, setCurrentRfid] = useState('');
+    const [lastScannedRfid, setLastScannedRfid] = useState('');
+    const [showFlash, setShowFlash] = useState(false);
 
     // Auto scan simulation untuk demo (real implementation akan pakai serial reader)
     const handleScanSimulation = () => {
-        setScanningStage('scanning');
+        const generatedRfid = generateRFIDId();
         
-        // Simulate scanning process
+        // Flash effect untuk feedback visual
+        setLastScannedRfid(generatedRfid);
+        setShowFlash(true);
+        
+        // Add to list
+        onScanComplete(generatedRfid);
+        
+        // Reset flash after animation
         setTimeout(() => {
-            const generatedRfid = generateRFIDId();
-            setCurrentRfid(generatedRfid);
-            setScanningStage('scanned');
-            
-            // Auto add to list after 1 second
-            setTimeout(() => {
-                onScanComplete(generatedRfid);
-                setCurrentRfid('');
-                setScanningStage('ready'); // Kembali ke ready untuk scan berikutnya
-            }, 1000);
-        }, 1500);
+            setShowFlash(false);
+        }, 800);
     };
 
     // Generate random RFID ID
@@ -66,49 +64,42 @@ const ScanningModal = ({ onClose, onScanComplete, onSaveAll, workOrderData, scan
                     </div>
                 </div>
 
-                {/* Scan Area */}
-                <div className="scan-area">
-                    {scanningStage === 'ready' && (
-                        <div className="scan-ready">
-                            <div className="rfid-icon-large">🏷️</div>
-                            <p className="scan-instruction">Dekatkan kartu RFID ke reader</p>
-                            <button 
-                                className="scan-trigger-btn"
-                                onClick={handleScanSimulation}
-                            >
-                                🔍 Simulasi Scan (Demo)
-                            </button>
-                        </div>
-                    )}
-
-                    {scanningStage === 'scanning' && (
-                        <div className="scanning-active">
-                            <div className="rfid-card-animation">
-                                <div className="rfid-card">
-                                    <div className="card-chip"></div>
-                                    <div className="card-waves">
-                                        <div className="wave"></div>
-                                        <div className="wave"></div>
-                                        <div className="wave"></div>
-                                    </div>
-                                    <div className="card-text">
-                                        <div className="card-logo">RFID</div>
-                                        <div className="card-number">●●●● ●●●● ●●●●</div>
-                                    </div>
+                {/* Scan Area - Always Active */}
+                <div className={`scan-area ${showFlash ? 'flash-success' : ''}`}>
+                    <div className="scanning-active">
+                        <div className="rfid-card-animation">
+                            <div className="rfid-card">
+                                <div className="card-chip"></div>
+                                <div className="card-waves">
+                                    <div className="wave"></div>
+                                    <div className="wave"></div>
+                                    <div className="wave"></div>
                                 </div>
-                                <div className="scan-beam"></div>
+                                <div className="card-text">
+                                    <div className="card-logo">RFID</div>
+                                    <div className="card-number">●●●● ●●●● ●●●●</div>
+                                </div>
                             </div>
-                            <p className="scanning-text">Scanning...</p>
+                            <div className="scan-beam"></div>
                         </div>
-                    )}
-
-                    {scanningStage === 'scanned' && (
-                        <div className="scan-success">
-                            <div className="success-icon-circle">✓</div>
-                            <p className="scanned-rfid">{currentRfid}</p>
-                            <p className="success-text">Ditambahkan ke list!</p>
-                        </div>
-                    )}
+                        <p className="scanning-text">🔍 Siap Scan - Dekatkan kartu RFID...</p>
+                        
+                        {/* Last Scanned Indicator */}
+                        {lastScannedRfid && (
+                            <div className="last-scanned-badge">
+                                ✓ {lastScannedRfid}
+                            </div>
+                        )}
+                        
+                        {/* Demo Scan Button */}
+                        <button 
+                            className="scan-trigger-btn"
+                            onClick={handleScanSimulation}
+                            disabled={isSubmitting}
+                        >
+                            📡 Simulasi Scan (Demo)
+                        </button>
+                    </div>
                 </div>
 
                 {/* Scanned List */}
