@@ -8,24 +8,12 @@ import { useState, useEffect } from 'react';
 import './ScanningModal.css';
 
 const ScanningModal = ({ onClose, onScanComplete, onSaveAll, workOrderData, scannedRfids, isSubmitting }) => {
-    const [lastScannedRfid, setLastScannedRfid] = useState('');
-    const [showFlash, setShowFlash] = useState(false);
-
     // Auto scan simulation untuk demo (real implementation akan pakai serial reader)
     const handleScanSimulation = () => {
         const generatedRfid = generateRFIDId();
         
-        // Flash effect untuk feedback visual
-        setLastScannedRfid(generatedRfid);
-        setShowFlash(true);
-        
-        // Add to list
+        // Add to list tanpa mengubah state apapun
         onScanComplete(generatedRfid);
-        
-        // Reset flash after animation
-        setTimeout(() => {
-            setShowFlash(false);
-        }, 800);
     };
 
     // Generate random RFID ID
@@ -64,9 +52,10 @@ const ScanningModal = ({ onClose, onScanComplete, onSaveAll, workOrderData, scan
                     </div>
                 </div>
 
-                {/* Scan Area - Always Active */}
-                <div className={`scan-area ${showFlash ? 'flash-success' : ''}`}>
+                {/* Scan Area - Always Scanning Animation */}
+                <div className="scan-area">
                     <div className="scanning-active">
+                        {/* RFID Card Animation - ALWAYS RUNNING */}
                         <div className="rfid-card-animation">
                             <div className="rfid-card">
                                 <div className="card-chip"></div>
@@ -82,14 +71,9 @@ const ScanningModal = ({ onClose, onScanComplete, onSaveAll, workOrderData, scan
                             </div>
                             <div className="scan-beam"></div>
                         </div>
-                        <p className="scanning-text">🔍 Siap Scan - Dekatkan kartu RFID...</p>
                         
-                        {/* Last Scanned Indicator */}
-                        {lastScannedRfid && (
-                            <div className="last-scanned-badge">
-                                ✓ {lastScannedRfid}
-                            </div>
-                        )}
+                        {/* Status Text */}
+                        <p className="scanning-text">🔍 Scanning... Dekatkan kartu RFID</p>
                         
                         {/* Demo Scan Button */}
                         <button 
@@ -97,7 +81,7 @@ const ScanningModal = ({ onClose, onScanComplete, onSaveAll, workOrderData, scan
                             onClick={handleScanSimulation}
                             disabled={isSubmitting}
                         >
-                            📡 Simulasi Scan (Demo)
+                            📡 Scan RFID (Demo)
                         </button>
                     </div>
                 </div>
