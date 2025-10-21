@@ -204,6 +204,49 @@ const MonitoringRFID = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Bottom Section: Additional Detail Cards */}
+            <div className="bottom-section">
+                {/* Reject Detail */}
+                <div className="detail-card red">
+                    <div className="detail-icon">❌</div>
+                    <div className="detail-content">
+                        <div className="detail-label">Reject</div>
+                        <div className="detail-value">{dashboardData.reject}</div>
+                        <div className="detail-subtitle">{percentages.reject}% of total</div>
+                    </div>
+                </div>
+
+                {/* Rework Detail */}
+                <div className="detail-card orange">
+                    <div className="detail-icon">🔄</div>
+                    <div className="detail-content">
+                        <div className="detail-label">Rework</div>
+                        <div className="detail-value">{dashboardData.rework}</div>
+                        <div className="detail-subtitle">{percentages.rework}% of total</div>
+                    </div>
+                </div>
+
+                {/* Hasper Detail */}
+                <div className="detail-card yellow">
+                    <div className="detail-icon">⚡</div>
+                    <div className="detail-content">
+                        <div className="detail-label">Hasper</div>
+                        <div className="detail-value">{dashboardData.hasper}</div>
+                        <div className="detail-subtitle">{percentages.hasper}% of total</div>
+                    </div>
+                </div>
+
+                {/* Good Product Detail */}
+                <div className="detail-card green">
+                    <div className="detail-icon">✅</div>
+                    <div className="detail-content">
+                        <div className="detail-label">Good Product</div>
+                        <div className="detail-value">{dashboardData.goodProduct}</div>
+                        <div className="detail-subtitle">{percentages.goodProduct}% of total</div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
