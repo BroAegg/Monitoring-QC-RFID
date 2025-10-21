@@ -41,6 +41,17 @@ body {
   overflow-x: hidden;
 }
 
+/* Main Content Area - Fullscreen Mode */
+.main-content-fullscreen {
+  flex: 1;
+  margin-left: 0;
+  min-height: 100vh;
+  background: transparent;
+  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
 /* Container */
 .container {
   width: 100%;
