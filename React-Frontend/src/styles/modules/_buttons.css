@@ -6,7 +6,7 @@
  * All button styles including primary, secondary, and variants
  */
 
-/* Base button */
+/* Base button - GCC Gistex Style */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -15,13 +15,11 @@
   padding: var(--spacing-3) var(--spacing-6);
   border: none;
   border-radius: var(--radius-md);
-  font-size: var(--text-sm);
-  font-weight: var(--font-semibold);
+  font-size: var(--font-base-size);
+  font-weight: var(--font-normal);
   cursor: pointer;
   transition: var(--transition-all);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-primary);
 }
 
 .btn:disabled {

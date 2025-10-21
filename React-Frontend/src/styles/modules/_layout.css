@@ -23,7 +23,11 @@ body {
 .app {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--bg-light) 0%, var(--white) 100%);
+  background: #F9FAFB;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #374151;
 }
 
 /* Main Content Area - Optimal Sidebar */

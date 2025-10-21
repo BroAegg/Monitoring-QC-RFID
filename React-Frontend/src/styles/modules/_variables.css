@@ -69,8 +69,8 @@
   --bg-dark: #0F172A;
   --bg-light: #F1F5F9;
 
-  /* ===== TEXT COLORS ===== */
-  --text-primary: #1E293B;
+  /* ===== TEXT COLORS (GCC GISTEX STYLE) ===== */
+  --text-primary: #374151;
   --text-secondary: #64748B;
   --text-muted: #94A3B8;
   --text-light: #F8FAFC;
@@ -149,6 +149,10 @@
   --transition-base: 0.2s ease;
   --transition-slow: 0.3s ease;
   --transition-all: all 0.2s ease;
+
+  /* ===== FONT FAMILY (GCC GISTEX STYLE) ===== */
+  --font-primary: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-base-size: 14px;
 
   /* ===== FONT SIZES ===== */
   --text-xs: 0.75rem;    /* 12px */

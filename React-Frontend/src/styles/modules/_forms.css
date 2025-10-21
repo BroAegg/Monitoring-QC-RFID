@@ -43,16 +43,14 @@
   margin-bottom: var(--spacing-6);
 }
 
-/* Form label */
+/* Form label - GCC Gistex Style */
 .form-label {
   display: block;
-  font-size: var(--text-sm);
-  font-weight: var(--font-medium);
+  font-size: var(--font-base-size);
+  font-weight: var(--font-normal);
   color: var(--text-primary);
   margin-bottom: var(--spacing-2);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-primary);
 }
 
 .form-label.required::after {
@@ -60,19 +58,17 @@
   color: var(--danger);
 }
 
-/* Form input */
+/* Form input - GCC Gistex Style */
 .form-input {
   width: 100%;
   padding: var(--spacing-3) var(--spacing-4);
   border: var(--border-2) solid var(--gray-300);
   border-radius: var(--radius-md);
-  font-size: var(--text-base);
+  font-size: var(--font-base-size);
   color: var(--text-primary);
   background: var(--bg-secondary);
   transition: var(--transition-all);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-primary);
 }
 
 .form-input::placeholder {

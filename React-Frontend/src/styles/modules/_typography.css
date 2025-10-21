@@ -6,24 +6,25 @@
  * Font families, sizes, weights, and text utilities
  */
 
-/* Base font family */
+/* Base font family - GCC Gistex Style */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-primary);
+  font-size: var(--font-base-size);
+  font-weight: var(--font-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: var(--leading-normal);
+  line-height: inherit;
   color: var(--text-primary);
 }
 
-/* Headings */
+/* Headings - GCC Gistex Style */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
+  font-family: var(--font-primary);
   font-weight: var(--font-semibold);
   line-height: var(--leading-tight);
   color: var(--text-primary);
