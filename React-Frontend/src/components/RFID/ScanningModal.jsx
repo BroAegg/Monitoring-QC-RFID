@@ -159,15 +159,6 @@ const ScanningModal = ({ onClose, onScanComplete, onSaveAll, workOrderData, scan
                         ) : (
                             <p className="scanning-text">🔍 Siap Scan - Dekatkan kartu RFID</p>
                         )}
-                        
-                        {/* Demo Scan Button */}
-                        <button 
-                            className="scan-trigger-btn"
-                            onClick={handleScanSimulation}
-                            disabled={isSubmitting}
-                        >
-                            📡 Scan RFID (Demo)
-                        </button>
                     </div>
                 </div>
 

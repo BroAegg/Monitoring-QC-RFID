@@ -75,66 +75,67 @@ const DaftarRFID = () => {
         }
     };
 
-    // Handle scan complete - menambahkan RFID ke list (belum simpan ke database)
-    const handleScanComplete = (rfidId) => {
-        // Tambahkan RFID baru ke array
+    // Handle scan complete - LANGSUNG SIMPAN KE DATABASE (AUTO-SAVE)
+    const handleScanComplete = async (rfidId) => {
+        const scanTime = new Date().toISOString();
+        
+        // Tambahkan RFID ke list untuk display
         setScannedRfids(prev => [...prev, {
             id: rfidId,
-            scanTime: new Date().toISOString()
+            scanTime: scanTime
         }]);
         
-        console.log('RFID ditambahkan ke list:', rfidId);
+        // LANGSUNG SAVE KE DATABASE
+        try {
+            const scanData = {
+                rfidId: rfidId,
+                workOrder: formData.workOrder,
+                style: formData.style,
+                buyer: formData.buyer,
+                scanTime: scanTime
+            };
+            
+            await addScan(scanData);
+            console.log('✅ RFID auto-saved:', rfidId);
+            
+            // Show brief success indicator (optional)
+            // bisa tambahkan flash green effect kalau mau
+        } catch (error) {
+            console.error('❌ Error auto-saving RFID:', error);
+            // Hapus dari list jika gagal save
+            setScannedRfids(prev => prev.filter(item => item.id !== rfidId));
+            alert('⚠️ Gagal menyimpan RFID: ' + rfidId);
+        }
+        
         // Modal tetap terbuka untuk scan berikutnya
     };
 
-    // Handle save all scanned RFIDs
+    // Handle selesai scanning (semua RFID sudah auto-saved)
     const handleSaveAll = async () => {
         if (scannedRfids.length === 0) {
             alert('⚠️ Belum ada RFID yang di-scan!');
             return;
         }
-
-        setIsSubmitting(true);
         
-        try {
-            // Save semua RFID yang di-scan
-            scannedRfids.forEach(rfid => {
-                const scanData = {
-                    rfidId: rfid.id,
-                    workOrder: formData.workOrder,
-                    style: formData.style,
-                    buyer: formData.buyer,
-                    scanTime: rfid.scanTime
-                };
-                addScan(scanData);
+        // Semua RFID sudah auto-saved, jadi tinggal close modal dan reset
+        console.log(`✅ Selesai scanning ${scannedRfids.length} RFID (semua sudah tersimpan)`);
+        
+        // Close modal
+        setShowScanModal(false);
+        
+        // Show success message
+        setSuccessMessage(`✅ ${scannedRfids.length} RFID berhasil disimpan!`);
+        
+        // Reset form dan scanned list after 2 seconds
+        setTimeout(() => {
+            setFormData({
+                workOrder: '',
+                style: '',
+                buyer: ''
             });
-            
-            console.log('Semua scan berhasil disimpan:', scannedRfids.length);
-            
-            // Close modal
-            setShowScanModal(false);
-            
-            // Show success message
-            setSuccessMessage(`✅ ${scannedRfids.length} RFID berhasil disimpan!`);
-            
-            // Reset form dan scanned list after 2 seconds
-            setTimeout(() => {
-                setFormData({
-                    workOrder: '',
-                    style: '',
-                    buyer: ''
-                });
-                setScannedRfids([]);
-                setSuccessMessage('');
-                setIsSubmitting(false);
-            }, 2000);
-            
-        } catch (error) {
-            console.error('Error saving scans:', error);
+            setScannedRfids([]);
             setSuccessMessage('');
-            alert('❌ Gagal menyimpan data RFID');
-            setIsSubmitting(false);
-        }
+        }, 2000);
     };
 
     // Handle modal close
