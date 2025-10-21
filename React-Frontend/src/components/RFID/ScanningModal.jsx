@@ -2,21 +2,86 @@
  * Scanning Modal Component
  * Menampilkan animasi scanning RFID dan capture RFID ID
  * Mode Batch: Scan beberapa RFID sekaligus sebelum save
+ * 
+ * AUTO RFID READER:
+ * - RFID reader mengetik ID otomatis
+ * - Auto-enter setelah ID lengkap
+ * - System capture keyboard input secara realtime
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './ScanningModal.css';
 
 const ScanningModal = ({ onClose, onScanComplete, onSaveAll, workOrderData, scannedRfids, isSubmitting }) => {
-    // Auto scan simulation untuk demo (real implementation akan pakai serial reader)
+    const [rfidBuffer, setRfidBuffer] = useState('');
+    const [lastScanTime, setLastScanTime] = useState(0);
+    const bufferTimeoutRef = useRef(null);
+
+    // Auto-detect RFID input dari keyboard (RFID reader mengetik otomatis)
+    useEffect(() => {
+        const handleKeyPress = (event) => {
+            const currentTime = Date.now();
+            
+            // Enter key = RFID selesai diketik, process sekarang
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                
+                if (rfidBuffer.trim().length > 0) {
+                    // Add RFID ke list
+                    onScanComplete(rfidBuffer.trim());
+                    
+                    // Reset buffer
+                    setRfidBuffer('');
+                    setLastScanTime(currentTime);
+                }
+                return;
+            }
+
+            // Ignore special keys
+            if (event.key.length > 1 && event.key !== 'Backspace') {
+                return;
+            }
+
+            // Backspace handling
+            if (event.key === 'Backspace') {
+                setRfidBuffer(prev => prev.slice(0, -1));
+                return;
+            }
+
+            // Tambah karakter ke buffer
+            setRfidBuffer(prev => prev + event.key);
+
+            // Auto-clear buffer setelah 100ms tidak ada input (reset jika terlalu lama)
+            if (bufferTimeoutRef.current) {
+                clearTimeout(bufferTimeoutRef.current);
+            }
+            
+            bufferTimeoutRef.current = setTimeout(() => {
+                setRfidBuffer('');
+            }, 100);
+        };
+
+        // Add event listener
+        window.addEventListener('keypress', handleKeyPress);
+        window.addEventListener('keydown', handleKeyPress);
+
+        // Cleanup
+        return () => {
+            window.removeEventListener('keypress', handleKeyPress);
+            window.removeEventListener('keydown', handleKeyPress);
+            if (bufferTimeoutRef.current) {
+                clearTimeout(bufferTimeoutRef.current);
+            }
+        };
+    }, [rfidBuffer, onScanComplete]);
+
+    // Demo scan simulation (untuk testing tanpa RFID reader fisik)
     const handleScanSimulation = () => {
         const generatedRfid = generateRFIDId();
-        
-        // Add to list tanpa mengubah state apapun
         onScanComplete(generatedRfid);
     };
 
-    // Generate random RFID ID
+    // Generate random RFID ID untuk demo
     const generateRFIDId = () => {
         const now = new Date();
         const year = now.getFullYear();
@@ -70,8 +135,15 @@ const ScanningModal = ({ onClose, onScanComplete, onSaveAll, workOrderData, scan
                             <div className="scan-beam"></div>
                         </div>
                         
-                        {/* Status Text */}
-                        <p className="scanning-text">🔍 Scanning... Dekatkan kartu RFID</p>
+                        {/* Status Text & Buffer Display */}
+                        {rfidBuffer.length > 0 ? (
+                            <div className="rfid-buffer-display">
+                                <p className="buffer-label">📝 Sedang membaca...</p>
+                                <p className="buffer-value">{rfidBuffer}</p>
+                            </div>
+                        ) : (
+                            <p className="scanning-text">🔍 Siap Scan - Dekatkan kartu RFID</p>
+                        )}
                         
                         {/* Demo Scan Button */}
                         <button 
