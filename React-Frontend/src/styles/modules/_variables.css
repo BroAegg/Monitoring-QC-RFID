@@ -76,13 +76,13 @@
   --text-light: #F8FAFC;
   --text-white: #FFFFFF;
 
-  /* ===== SIDEBAR SPECIFIC ===== */
-  --sidebar-bg: #0F172A;
-  --sidebar-hover: #1E293B;
-  --sidebar-active: #2563EB;
-  --sidebar-text: #94A3B8;
+  /* ===== SIDEBAR SPECIFIC - GCC BLUE THEME ===== */
+  --sidebar-bg: linear-gradient(180deg, #0066FF 0%, #0052CC 100%);
+  --sidebar-hover: rgba(255, 255, 255, 0.1);
+  --sidebar-active: #3399FF;
+  --sidebar-text: #FFFFFF;
   --sidebar-text-active: #FFFFFF;
-  --sidebar-border: #1E293B;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
 
   /* ===== SPACING SYSTEM ===== */
   /* Based on 4px grid */
