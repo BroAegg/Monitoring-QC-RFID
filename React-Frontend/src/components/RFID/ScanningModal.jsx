@@ -18,8 +18,23 @@ const ScanningModal = ({ onClose, onScanComplete, onSaveAll, workOrderData, scan
     const bufferTimeoutRef = useRef(null);
 
     // Auto-detect RFID input dari keyboard (RFID reader mengetik otomatis)
+    // HANYA AKTIF DI MODAL INI, TIDAK GANGGU INPUT FORM LAIN
     useEffect(() => {
         const handleKeyPress = (event) => {
+            // SKIP jika user sedang mengetik di input/textarea/select
+            const activeElement = document.activeElement;
+            const isTypingInInput = activeElement && (
+                activeElement.tagName === 'INPUT' ||
+                activeElement.tagName === 'TEXTAREA' ||
+                activeElement.tagName === 'SELECT' ||
+                activeElement.isContentEditable
+            );
+
+            // Jika sedang ketik di form, JANGAN tangkap input RFID
+            if (isTypingInInput) {
+                return;
+            }
+
             const currentTime = Date.now();
             
             // Enter key = RFID selesai diketik, process sekarang
